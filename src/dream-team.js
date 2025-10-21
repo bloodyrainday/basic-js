@@ -14,11 +14,16 @@ const { NotImplementedError } = require("../lib");
  *
  */
 function createDreamTeam(members) {
-  members.sort();
+  if (!Array.isArray(members)) return false;
+  let arr = members
+    .map((item) =>
+      typeof item === "string" ? item.trim().toUpperCase() : item
+    )
+    .sort();
   let name = [];
-  members.forEach((item) => {
+  arr.forEach((item) => {
     if (typeof item === "string") {
-      name.push(item[0].toUpperCase());
+      name.push(item[0]);
     }
   });
   return name.join("");
